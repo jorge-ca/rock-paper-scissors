@@ -17,7 +17,7 @@ function humanPlay(){
 		case "paper":
 			return 1;
 			break;
-		case "scissors"
+		case "scissors":
 			return 2;
 			break;
 		default:
@@ -33,7 +33,7 @@ function playRound(playerSelection, computerSelection){
 	let scissorPlay = [2, 1, 0];
 
 
-	switch(computerSelction){
+	switch(computerSelection){
 		case 0:
 			console.log("Computer plays: Rock");
 			break;
@@ -45,53 +45,58 @@ function playRound(playerSelection, computerSelection){
 			break;
 		default:
 			console.log("Computer plays: Unknown (" + computerSelction.toString() + ")" );
-			return [-1, playerSelction];
+			return [-1, playerSelection];
 			break;
 	}
 
 
-	if(playerSelction == computerSelection){
-		return [0, playerSelction];
+	if(playerSelection == computerSelection){
+		return [0, playerSelection];
 	}
 
-	switch(playerSelction){
+	switch(playerSelection){
 		case 0:
-			return [rockPlay[computerSelection], playerSelction];
+			return [rockPlay[computerSelection], playerSelection];
 			break;
 		case 1:
-			return [paperPlay[computerSelection], playerSelction];
+			return [paperPlay[computerSelection], playerSelection];
 		case 2:
-			return [scissorPlay[computerSelection], playerSelction];
+			return [scissorPlay[computerSelection], playerSelection];
 		default:
 			console.log("Invalid playing option");
-			return [-1, playerSelction];
+			return [-1, playerSelection];
 	}
 
 }
 
 function game(){
-	let playerOne = humanPlay();
-	let playerTwo = computerPlay();
+	let playerOne = -1;
+	let playerTwo = -1;
 
 	let scoreOne = 0;
 	let scoreTwo = 0;
 
+	let results = [-1, -1];
+
 	let gameCount = 0;
 	while( gameCount < 5 ){
-		let results = playRound(playerOne, playerTwo);
+		playerOne = humanPlay();
+		playerTwo = computerPlay();
+
+		results = playRound(playerOne, playerTwo);
 
 		gameCount +=1;
 		switch(results[0]){
 			case 0:
-				console.log("Tie match!");
+				console.log("Round " + gameCount.toString() + "> Tie match!");
 				break;
 			case 1:
 				scoreOne += 1;
-				console.log("You win!" + winStatement(results));
+				console.log("Round " + gameCount.toString() + "> You win! " + winStatement(results));
 				break;
 			case 2:
 				scoreTwo += 1;
-				console.log("You lose! " + winStatement(resutls));
+				console.log("Round " + gameCount.toString() + "> You lose! " + winStatement(results));
 				break;
 			default:
 				console.log("Invalid round thrown out. Replay round");
@@ -113,16 +118,19 @@ function game(){
 		console.log("Tied game!");
 	}
 
+	console.log("---FINAL SCORE---");
+	console.log("YOU: " + scoreOne.toString() + ";  PC: " + scoreTwo.toString() );
+
 }
 
 function winStatement( gameResults ){
-	switch(gameresults[1]){
+	switch(gameResults[1]){
 		case 0:
-			return ( (gameresults[0] == 1) ? "Rock beats Scissors" : "Paper beats Rock");
+			return ( (gameResults[0] == 1) ? "Rock beats Scissors" : "Paper beats Rock");
 		case 1:
-			return ( (gameresults[0] == 1) ? "Paper beats Rock" : "Scissors beat Paper");
+			return ( (gameResults[0] == 1) ? "Paper beats Rock" : "Scissors beat Paper");
 		case 2:
-			return ( (gameresults[0] == 1) ? "Scissors beat Paper": "Rock beats Scissors");
+			return ( (gameResults[0] == 1) ? "Scissors beat Paper": "Rock beats Scissors");
 	}
 }
 
