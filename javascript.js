@@ -27,10 +27,26 @@ function humanPlay(){
 	return -1;
 }
 
+function getPlay(x){
+	return [0,2,1][x % 3];
+}
+
+function getRockPlay(x){
+	return getPlay(x);
+}
+
+function getPaperPlay(x){
+	return getPlay(x + 2);
+}
+
+function getScissorPlay(x){
+	return getPlay(x + 1);
+}
+
 function playRound(playerSelection, computerSelection){
-	let rockPlay = [0, 2, 1];
-	let paperPlay = [1, 0, 2];
-	let scissorPlay = [2, 1, 0];
+	//let rockPlay = [0, 2, 1];
+	//let paperPlay = [1, 0, 2];
+	//let scissorPlay = [2, 1, 0];
 
 
 	switch(computerSelection){
@@ -56,12 +72,12 @@ function playRound(playerSelection, computerSelection){
 
 	switch(playerSelection){
 		case 0:
-			return [rockPlay[computerSelection], playerSelection];
+			return [getRockPlay(computerSelection), playerSelection];
 			break;
 		case 1:
-			return [paperPlay[computerSelection], playerSelection];
+			return [getPaperPlay(computerSelection), playerSelection];
 		case 2:
-			return [scissorPlay[computerSelection], playerSelection];
+			return [getScissorPlay(computerSelection), playerSelection];
 		default:
 			console.log("Invalid playing option");
 			return [-1, playerSelection];
