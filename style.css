@@ -51,4 +51,24 @@ body {
   height: 60px;
   margin-top: 20px;
   margin-bottom: 20px;
+  color: black;
+  text-align: right;
+  font-size:  25px;
+  padding-right: 20px;
+}
+
+.button-play {
+  background: greenyellow;
+}
+
+.button-rock {
+  background: sandybrown;
+}
+
+.button-paper {
+  background: dimgray;
+}
+
+.button-scissors {
+  background: firebrick;
 }

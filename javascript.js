@@ -96,6 +96,7 @@ function game(){
 
 	let gameCount = 0;
 	while( gameCount < 5 ){
+		updateScores(scoreOne, scoreTwo);
 		playerOne = humanPlay();
 		playerTwo = computerPlay();
 
@@ -120,8 +121,8 @@ function game(){
 				break;
 		}
 
-
 	}
+	updateScores(scoreOne, scoreTwo);
 
 
 	if( scoreOne > scoreTwo ){
@@ -151,3 +152,12 @@ function winStatement( gameResults ){
 }
 
 game();
+
+function updateScores(scoreOne, scoreTwo){
+	let container1 = document.querySelector('.one-scorecard');
+	let container2 = document.querySelector('.two-scorecard');
+	container1.textContent = scoreOne;
+	container2.textContent = scoreTwo;
+
+}
+
