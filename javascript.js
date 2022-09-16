@@ -1,5 +1,28 @@
 console.log("Rock-Paper-Scissors");
 
+let buttonRock = document.querySelector('.button-rock');
+let buttonPaper = document.querySelector('.button-paper');
+let buttonScissors = document.querySelector('.button-scissors');
+let buttonPlay = document.querySelector('.button-play');
+let scoreOne = 0;
+let scoreTwo = 0;
+let gameCount = 0;
+
+
+
+
+buttonRock.addEventListener( "click", function() {
+	buttonGame(0);
+});
+
+buttonPaper.addEventListener( "click", function() {
+	buttonGame(1);
+});
+
+buttonScissors.addEventListener( "click", function() {
+	buttonGame(2);
+});
+
 
 function computerPlay(){
 	let randomNumber = Math.floor(Math.random() * 100) + 1;
@@ -140,6 +163,64 @@ function game(){
 
 }
 
+function buttonGame(playerOne){
+	let playerTwo = -1;
+
+	let results = [-1, -1];
+	if( gameCount < 5 ){
+		playerTwo = computerPlay();
+
+		results = playRound(playerOne, playerTwo);
+
+		gameCount +=1;
+		switch(results[0]){
+			case 0:
+				console.log("Round " + gameCount.toString() + "> Tie match!");
+				break;
+			case 1:
+				scoreOne += 1;
+				console.log("Round " + gameCount.toString() + "> You win! " + winStatement(results));
+				break;
+			case 2:
+				scoreTwo += 1;
+				console.log("Round " + gameCount.toString() + "> You lose! " + winStatement(results));
+				break;
+			default:
+				console.log("Invalid round thrown out. Replay round");
+				gameCount -= 1;
+				break;
+		}
+		updateButtonScores();
+	}
+
+	if(gameCount > 4) {
+
+		buttonRock.disabled = true;
+		buttonPaper.disabled = true;
+		buttonScissors.disabled = true;
+		buttonPlay.disabled = true;
+
+	
+		if( scoreOne > scoreTwo ){
+			console.log("You won!");
+		}
+		if( scoreTwo > scoreOne ){
+			console.log("Computer player wins!");
+		}
+		if( scoreOne == scoreTwo ){
+			console.log("Tied game!");
+		}
+
+		console.log("---FINAL SCORE---");
+		console.log("YOU: " + scoreOne.toString() + ";  PC: " + scoreTwo.toString() );
+
+	}
+
+
+
+}
+
+
 function winStatement( gameResults ){
 	switch(gameResults[1]){
 		case 0:
@@ -151,7 +232,7 @@ function winStatement( gameResults ){
 	}
 }
 
-game();
+//game();
 
 function updateScores(scoreOne, scoreTwo){
 	let container1 = document.querySelector('.one-scorecard');
@@ -159,5 +240,12 @@ function updateScores(scoreOne, scoreTwo){
 	container1.textContent = scoreOne;
 	container2.textContent = scoreTwo;
 
+}
+
+function updateButtonScores(){
+	let container1 = document.querySelector('.one-scorecard');
+	let container2 = document.querySelector('.two-scorecard');
+	container1.textContent = scoreOne;
+	container2.textContent = scoreTwo;
 }
 
